@@ -136,7 +136,14 @@ class CheckWriter
     				//tens place has a zero
     				if($numberarray[$x+1] == 0)
     				{
-    					$numberWord =  $numberwords[$digit];
+                        if($digit == 0 && isset($numberarray[$x+2]))
+                        {
+                            $numberWord = '';
+                        }
+                        else
+                        {   
+    					   $numberWord =  $numberwords[$digit];
+                        }
     				}
     				//tens place has a one use *teen word
     				elseif($numberarray[$x+1] == 1)
@@ -165,7 +172,6 @@ class CheckWriter
     				$numberWord = $numberwords[$digit];
     			}
 
-
     			//add  thousand, million billion based on array position
     			switch($x) {
     				case 3:
@@ -180,11 +186,7 @@ class CheckWriter
     				default:
     					$otherplace = '';
     			}
-    			if($numberWord != '')
-    			{
-    				array_unshift($wordarray, $numberWord . $otherplace);
-    			}	
-
+    			array_unshift($wordarray, $numberWord . $otherplace);
 
     		}
     		elseif($x == 2 || $x%3 == 2)
